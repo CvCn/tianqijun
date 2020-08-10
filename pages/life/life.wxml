@@ -1,0 +1,140 @@
+<!--pages/life/life.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+<default binddark="onDark" color="{{color}}">
+  <view class="l-main" style='{{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-80}}px;'>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">空气指数</view>
+      <view class="list">
+        <view class="item">
+          <view>空气</view>
+          <view>{{tools.aqiSwitch(realtime.aqi)}}</view>
+        </view>
+        <view class="item">
+          <view>湿度</view>
+          <view>{{tools.round(realtime.humidity*100)}}<view class="danwei">%</view></view>
+        </view>
+        <view class="item">
+          <view>AQI</view>
+          <view>{{realtime.aqi}}</view>
+        </view>
+        <view class="item">
+          <view>PM2.5</view>
+          <view>{{realtime.pm25}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>PM1.0</view>
+          <view>{{realtime.pm10}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>能见度</view>
+          <view>{{realtime.visibility}}<view class="danwei">km</view></view>
+        </view>
+        <view class="item">
+          <view>二氧化氮</view>
+          <view>{{realtime.no2}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>一氧化碳</view>
+          <view>{{realtime.co}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>二氧化硫</view>
+          <view>{{realtime.so2}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>气压</view>
+          <view>{{realtime.pres}}<view class="danwei">Pa</view></view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">生活指数</view>
+      <view class="list">
+        <view class="item">
+          <view>紫外线</view>
+          <view>{{realtime.ultraviolet.desc}}</view>
+        </view>
+        <view class="item">
+          <view>感冒指数</view>
+          <view>{{daily.coldRisk[0].desc}}</view>
+        </view>
+        <view class="item">
+          <view>体感</view>
+          <view>{{realtime.comfort.desc}}</view>
+        </view>
+        <view class="item">
+          <view>洗车</view>
+          <view>{{daily.carWashing[0].desc}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">降水</view>
+      <view class="list">
+        <view class="item">
+          <view>云量</view>
+          <view>{{tools.round(realtime.cloudrate*100)}}<view class="danwei">%</view></view>
+        </view>
+        <view class="item">
+          <view>本地降水强度</view>
+          <view>{{tools.round(realtime.precipitation.local.intensity*100)}}<view class="danwei">%({{tools.intensity(realtime.precipitation.local.intensity)}})</view></view>
+        </view>
+        <view class="item" wx:if="{{realtime.precipitation.nearest}}">
+          <view>最近降水带距离</view>
+          <view>{{realtime.precipitation.nearest.distance}}<view class="danwei">km</view></view>
+        </view>
+        <view class="item" wx:if="{{realtime.precipitation.nearest}}">
+          <view>最近降水带强度</view>
+          <view>{{tools.round(realtime.precipitation.nearest.intensity*100)}}<view class="danwei">%({{tools.intensity(realtime.precipitation.nearest.intensity)}})</view></view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">风</view>
+      <view class="list">
+        <view class="item">
+          <view>风向</view>
+          <view>{{tools.windDir(realtime.wind.direction)}}</view>
+        </view>
+        <view class="item">
+          <view>风速</view>
+          <view>{{realtime.wind.speed}}<view class="danwei">km/h</view></view>
+        </view>
+        <view class="item">
+          <view>等级</view>
+          <view>{{tools.windJi(realtime.wind.speed)}}</view>
+        </view>
+        <view class="item">
+          <view>风感</view>
+          <view>{{tools.windName(realtime.wind.speed)}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">日出日落</view>
+      <view class="list">
+        <view class="item">
+          <view>日出</view>
+          <view>{{daily.astro[0].sunrise.time}}</view>
+        </view>
+        <view class="item">
+          <view>日落</view>
+          <view>{{daily.astro[0].sunset.time}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style='color: {{color}};{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">其它</view>
+      <view class="list">
+        <view class="item">
+          <view>臭氧</view>
+          <view>{{realtime.o3}}<view class="danwei">μg/m3</view></view>
+        </view>
+        <view class="item">
+          <view>短波辐射</view>
+          <view>{{realtime.dswrf}}<view class="danwei">W/M2</view></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</default>

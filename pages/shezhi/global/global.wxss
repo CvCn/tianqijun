@@ -1,0 +1,32 @@
+/* pages/shezhi/global/global.wxss */
+
+.g-main {
+  padding-top: 60rpx;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30rpx;
+}
+
+.item {
+  margin-bottom: 2rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+  /* height: 105rpx; */
+  padding: 30rpx 30rpx;
+  color: #8c8c8c;
+}
+.tip{
+  font-size: 20rpx; 
+  padding-top: 20rpx;
+  padding-bottom: 30rpx;
+  width: 630rpx;
+  color: #8c8c8c;
+}

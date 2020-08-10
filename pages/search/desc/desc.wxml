@@ -1,0 +1,42 @@
+<!--pages/search/desc/desc.wxml-->
+<default load="{{load}}" nav-name="输入地区名称" req-fail="{{reqFail}}"  binddark="onDark" color="{{color}}">
+  <view style='color: #8c8c8c;{{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-20}}px;'>
+    <view class="top" style='top: {{70 + navHeight}}rpx;{{darkMode ? "background-color: #131313;" : ""}}'>
+      <input type="text" style='color: {{fontColor}};{{darkMode ? "background-color: rgb(32,32,32);": ""}}' value="{{inp}}" confirm-type="search" bindinput='input' bindconfirm="matchCity"></input>
+      <view class="iconfont icon-close close" bindtap='bclear'></view>
+      <view class="button" style='margin-left: 20rpx; background-color: {{color}};' bindtap='matchCity'>
+        <i class="iconfont icon-search"></i>
+      </view>
+      <view class="button" style='margin-left: 20rpx; background-color: {{color}};' bindtap='openMap'>
+        <i class="iconfont icon-ditu"></i>
+      </view>
+    </view>
+
+    <view class="tip-list" style='padding-top: 130rpx; height: {{topHeight}}rpx;{{darkMode ? "background-color: #131313;" : ""}}'>
+      <view class="tip-item" wx:for="{{result}}" wx:key="id" bindtap='onCity' data-id="{{item.id}}" style='top: {{btop[index]}}rpx;{{darkMode ? "background-color: #131313;" : ""}}'>
+        <view style='color: {{color}};{{item.isCity ? "font-size: 40rpx" : ""}}'>
+          <i wx:if="{{item.isCity}}" class="iconfont icon-dian"></i>{{item.fullname}}</view>
+        <view>
+          <view style="font-size: 24rpx; margin-left: 5rpx">{{item.allName}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="history" style='color: {{color}};{{darkMode ? "background-color: #131313;": ""}}' wx:if="{{history.length > 0}}">
+      <view class="history-title">历史记录</view>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{history}}" wx:key="index" style='border: 1px solid {{color}};' bindtap='label' data-item="{{item}}">{{item}}</view>
+        <view class="history-item" style='border: 1px solid {{color}};' bindtap='clear'>清空历史记录</view>
+      </view>
+    </view>
+
+    <view class="history" style='color: {{color}};{{darkMode ? "background-color: #131313;": ""}}' wx:if="{{city.length > 0}}">
+      <view class="history-title">热门城市</view>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{hot}}" wx:key="index" style='border: 1px solid {{color}};' bindtap='label' data-item="{{item}}">{{item}}</view>
+        <!-- <view class="history-item" wx:if="{{history.length > 0}}" style='border: 1px solid {{color}};' bindtap='clear'>清空历史记录</view> -->
+      </view>
+    </view>
+
+  </view>
+</default>

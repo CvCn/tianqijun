@@ -1,0 +1,77 @@
+/* pages/search/desc/desc.wxss */
+
+.top{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #8c8c8c;
+  padding: 30rpx 0 20rpx 0;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+
+input{
+  /* border: 1px solid black; */
+  padding: 14rpx 80rpx 14rpx 30rpx;
+  font-size: 32rpx;
+  background-color: #f1f1f1;
+  width: 370rpx;
+  /* border-radius: 10rpx; */
+}
+
+
+.close{
+  margin-left: -65rpx;
+  margin-right: 10rpx;
+  padding: 15rpx;
+  /* border: 1px solid black; */
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.tip-list{
+  display: flex;
+  flex-direction: column;
+  align-items: cebter;
+  justify-content: center;
+  position: relative;
+}
+
+.tip-item{
+  width: 690rpx;
+  font-size: 32rpx;
+  /* margin-bottom: 30rpx; */
+  position: absolute;
+  left: 0;
+  padding: 0 30rpx;
+  background-color: #f9f9f9;
+}
+.tip-item > view:last-child{
+  text-align: right;
+}
+
+.history{
+  padding: 0 0 30rpx 30rpx;
+}
+
+.history-title{
+  font-size: 54rpx;
+}
+
+.history-list{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30rpx;
+}
+
+.history-item{
+  font-size: 28rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  margin: 0 20rpx 30rpx 0;
+}

@@ -1,0 +1,44 @@
+/* pages/index/rain/rain.wxss */
+
+.r-main {
+  position: relative;
+  
+}
+
+.rain-img {
+  transform: rotate(90deg);
+}
+
+.right {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  background-color: white;
+  width: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.right > view:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  height: 90%;
+  
+}
+
+.sli{
+  width: 500rpx;
+}
+
+.sli-fa{
+  position: fixed;
+  background-color: #f9f9f9;
+  z-index: 1;
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

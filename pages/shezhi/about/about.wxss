@@ -1,0 +1,40 @@
+/* pages/shezhi/about/about.wxss */
+
+.a-main {
+  padding-top: 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.head {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 11rpx;
+}
+
+.head-fa {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24rpx;
+}
+
+.btn {
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  padding: 0 50rpx;
+}
+
+.card{
+  margin-bottom: 30rpx;
+}

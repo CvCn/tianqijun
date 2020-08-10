@@ -1,0 +1,24 @@
+<!--pages/index/rain/rain.wxml-->
+<default>
+  <view class="r-main">
+    <!-- <view class="right" bindtap='back'>
+    <view>
+      <i class="iconfont icon-back" style="font-size: 50rpx;margin-left: 20rpx;"></i>
+      <view style='transform: rotate(-90deg); width: 100rpx;text-align: center;font-size: 28rpx; margin-left: -40rpx;'>返回</view>
+    </view>
+  </view> -->
+
+    <view class="sli-fa" style='top: {{navHeight+50}}px;'>
+      <slider class="sli" min="10" max="60" step="1" value="30" bindchanging="change" bindchange="change" activeColor="{{color}}"></slider>
+    </view>
+
+
+    <view class="rain-img" style='margin-top: {{460 - (height-100)/2}}rpx;'>
+      <view class="card" style='width: {{width}}rpx; height: {{height}}rpx;'>
+        <image src="{{tempImg}}" style='width: {{width}}rpx; height: {{height}}rpx;'></image>
+      </view>
+
+    </view>
+
+  </view>
+</default>

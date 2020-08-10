@@ -1,0 +1,51 @@
+/* pages/share/share.wxss */
+
+.s-main{
+  margin-top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.s-main > image{
+  width: 690rpx;
+  height: 862rpx;
+}
+
+.s-main > view:nth-child(2){
+  display: flex;
+  justify-content: center;
+  width: 690rpx;
+  margin-top: 50rpx;
+}
+
+.s-main > view:nth-child(3){
+  width: 275rpx;
+  margin-top: 50rpx;
+  color: #8c8c8cb4;
+  font-size: 16rpx;
+}
+
+.s-main > view:nth-child(4){
+  width: 275rpx;
+  margin-top: 10rpx;
+  color: #8c8c8cb4;
+  font-size: 16rpx;
+  margin-bottom: 60rpx;
+}
+
+
+.button{
+  border: 1px solid #8c8c8c;
+  color: #8c8c8c;
+  font-size: 28rpx;
+}
+
+.button::after {
+  border: none;
+}
+
+.button .button-hover {
+  color: none;
+}

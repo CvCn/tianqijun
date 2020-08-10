@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "default": "/components/default",
+    "ec-canvas": "../../static/ec-canvas/ec-canvas",
+    "details-card": "/components/detailsCard/detailsCard"
+  },
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,48 @@
+/* pages/shezhi/shezhi.wxss */
+
+.s-main {
+  padding-top: 60rpx;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  padding: 50rpx 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+  height: 105rpx;
+  padding: 0 30rpx;
+  color: #8c8c8c;
+}
+
+.fankui {
+  background-color: #fff;
+  width: 690rpx;
+  outline: none;
+  margin: 0 0 30rpx 0;
+}
+
+.fankui::after {
+  border: none;
+}
+
+.famkui .button-hover {
+  color: none;
+}

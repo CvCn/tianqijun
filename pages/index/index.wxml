@@ -1,0 +1,443 @@
+<!--index.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+<default id="default" nav-name="{{chanName == '' ? address : chanName}}" color="{{color}}" load="{{load}}" req-fail="{{reqFail}}" bindmyload="myLoad" menu-style="home" binddark="onDark" curr="{{chanName == ''}}">
+	<view style='{{darkMode ? "background-color: #131313;": ""}} height: {{windH}}px; width: 100%;'>
+		<view class="i-main" hidden="{{info == ''}}" style='{{darkMode ? "background-color: #131313;": ""}}'>
+			<view class="upd" style='margin-bottom: 55rpx;'>更新于 {{tools.timeFormat(info.server_time)}}</view>
+			<!-- 天气 -->
+			<view class="card" style="animation: none; padding-bottom: 130rpx;{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}} overflow: hidden;">
+				<view style="transform: translate(0, {{ty}}rpx);">
+					<!-- 晴天 -->
+					<view id="sun" wx:if="{{sw == 1}}" style="background-color: {{color}}c8;">
+						<view class="sunny"></view>
+					</view>
+					<!-- 晴夜 -->
+					<view class="moon-fa" wx:if="{{sw == 2}}">
+						<view class="moon"></view>
+						<view class="moon-b" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}} margin-left: {{newMoon}}rpx;"></view>
+						<view class="start"> </view>
+						<view class="start" hidden="{{newMoon > 90}}"> </view>
+						<view class="start"> </view>
+						<view class="start"> </view>
+						<view class="start" hidden="{{newMoon > 90}}"> </view>
+						<view class="start"> </view>
+					</view>
+					<!-- 多云天 -->
+					<view class="cloud-day" wx:if="{{sw == 3}}">
+						<view class="cloud-sun"></view>
+						<view class="cloud-fa">
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}"></view>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}"></view>
+						</view>
+					</view>
+					<!-- 多云夜 -->
+					<view class="cloud-day" wx:if="{{sw == 4}}" style='margin-top: -50rpx;'>
+						<view class="moon-fa" style='margin-left: 0; animation: 0;transform: rotate(-30deg);'>
+							<view class="moon"></view>
+							<view class="moon-b" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}} margin-left: {{newMoon}}rpx;"></view>
+						</view>
+						<view class="cloud-fa" style='margin-top: -10rpx;'>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}"></view>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}"></view>
+						</view>
+					</view>
+					<!-- 阴 -->
+					<view class="cloud-day" wx:if="{{sw == 5}}" style='margin-top: 130rpx;'>
+						<view class="cloud-fa c2">
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}" style='background-color: {{darkMode ? "background-color: rgb(32,32,32)" : "rgb(204, 204, 204)"}}; box-shadow: 0 0 0 0;'></view>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}" style='background-color: {{darkMode ? "background-color: rgb(32,32,32)" : "rgb(204, 204, 204)"}}; box-shadow: 0 0 0 0;'></view>
+						</view>
+					</view>
+					<!-- 大风 -->
+					<view class="wind" wx:if="{{sw == 6}}">
+						<view class="wind-head" style='animation: wind {{120/speed}}s linear infinite;'>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+						</view>
+						<view class="wind-body">
+							<view></view>
+						</view>
+					</view>
+					<!-- 雾霾 -->
+					<view class="smog" wx:if="{{sw == 7}}">
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+					</view>
+					<!-- 雨 -->
+					<view class="rain" wx:if="{{sw == 8}}">
+						<view class="cloud-fa" style='margin-left: 70rpx;'>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}" style='background-color: #9CDCF8;'></view>
+							<view class="{{darkMode ? 'cloud-dark' : 'cloud'}}" style='background-color: #9CDCF8;'></view>
+						</view>
+						<view class="rain-p">
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+							<view></view>
+						</view>
+					</view>
+					<!-- 雪 -->
+					<view class="snow" wx:if="{{sw == 9}}">
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+						<view></view>
+					</view>
+				</view>
+
+			</view>
+			<view class="weather">
+				<text style='color: {{color}};'>{{tools.round(info.result.realtime.temperature)}}°</text>
+				<text decode='true' style='color: {{color}};'>{{tools.round(info.result.daily.temperature[0].min)}}° / {{tools.round(info.result.daily.temperature[0].max)}}°&nbsp;&nbsp;&nbsp;{{weatherDesc == '风' ? (tools.windDir (info.result.realtime.wind.direction)) + (tools.windJi(info.result.realtime.wind.speed)) : weatherDesc}}<text decode='true' wx:if="{{ADate.isHomeTop}}">&nbsp;&nbsp;<text wx:for="{{ADate.homeTop}}" wx:key="index" wx:if="{{item}}" decode='true'>
+					<text decode='true' wx:for="{{item.value}}" wx:for-index="idx" wx:for-item="item2" wx:key="idx">{{item2}}&nbsp;</text>
+				</text></text>
+				</text>
+
+				<view>
+					<view>{{info.result.hourly.description}}</view>
+					<!-- <view class="bbttn">
+
+            <view class="tishi-fa" wx:if="{{tishi}}">
+              <view class="tishi" style='{{darkMode ? "background-color: #131313;" : ""}}'>
+                <view bindtap="close">
+                  <i class="iconfont icon-close"></i>
+                </view>
+                <view>快来试试语音播报~</view>
+              </view>
+              <view class="triangle" style='border-color: {{color}} transparent transparent;'></view>
+            </view>
+            <view style='padding: 0 20rpx;position: relative;' class="playy" bindtap="play" wx:if="{{!audioLoad}}">
+              <i class="iconfont icon-laba" style="font-size: 40rpx; color: {{color}};"></i>
+              <view class="meng" style='{{audioStatus == 1 ? "animation: meng 1.2s ease-in infinite;": ""}}{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'></view>
+            </view>
+
+            <view style='padding: 0 20rpx;position: relative;' class="spn" wx:else>
+              <i class="iconfont icon-jiazai" style="font-size: 40rpx; color: {{color}};"></i>
+            </view>
+
+          </view> -->
+
+				</view>
+			</view>
+
+
+			<!-- 日历 -->
+			<!-- <view class="card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}" bindtap="openRili" wx:if="{{ADate.isHoliday}}">
+        <view class="card-title" style='color: {{color}}; padding: 0 5rpx;'>{{ADate.oYear}}年{{ADate.oMonth}}月{{ADate.oDate}}日
+        </view>
+        <view class="l-top">
+          <view class="l-top-1">
+            <view style="margin-top: 20rpx; color: {{color}};" wx:for="{{ADate.festivalTodo}}" wx:key="index" wx:if="{{item}}">{{item.value}}</view>
+            <view class="l-top-4" style="background-color: {{color}}1a; margin: 30rpx 0; padding: 10rpx;">
+              <view >星期{{ADate.cnDay}}</view>
+            </view>
+            <view class="l-top-desc">
+              {{ADate.gzYear}}{{ADate.animal}}年{{ADate.lMonth}}月{{ADate.lDate}}
+            </view>
+            <view wx:if="{{ADate.term != ''}}" style="color: {{color}}; font-size: 28rpx; align-items: center;">{{ADate.term}}</view>
+          </view>
+        </view>
+      </view> -->
+
+			<!-- 预警 -->
+			<view class="card" wx:if="{{alert.length>0}}" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}" bindtap='jump' data-path="/pages/early/early?alert={{alert}}">
+				<view wx:for="{{alert}}" wx:key="index" class="alert-more">
+					<view style='color: {{color}};'>
+						<i class="iconfont icon-richu" style="margin-right: 15rpx; color: {{item.jibie}}; background-color: {{item.jibie}}; border-radius: 50%;"></i>
+						<span>{{item.title}}</span>
+					</view>
+					<!-- <view class="alert-context">{{item.description}}</view> -->
+				</view>
+			</view>
+
+
+			<!-- 短频降水量 -->
+			<view class='card' wx:if="{{isRain}}" bindtap='calert' style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+				<view class="card-title rain-title" style='color: {{color}};'>
+					<view>{{info.result.forecast_keypoint}}</view>
+					<!-- <i class="iconfont icon-fangda" bindtap="jump" data-path="/pages/index/rain/rain?tempImg={{yuUrl}}&width={{yuWidth+340}}&height=300"></i> -->
+				</view>
+				<view class=" yu-fa">
+					<!-- <view class="yu-desc">
+          <view style='margin-top: 35rpx;'>暴</view>
+          <view style='margin-top: 43rpx;'>大</view>
+          <view style='margin-top: 32rpx;'>中</view>
+          <view style='margin-top: 95rpx;'>小</view>
+        </view> -->
+					<!-- <scroll-view scroll-x style='height: 400rpx; width: 100%; margin-top: 30rpx; '> -->
+					<!-- <canvas style="width: {{yuWidth+340}}rpx; height: 300rpx;" wx:if="{{yuUrl == ''}}" canvas-id="yu" binderror="canvasIdErrorCallback"></canvas>
+          <image src="{{yuUrl}}" style='width: {{yuWidth+340}}rpx; height:'
+          ' 300rpx;' wx:else></image> -->
+					<view style="width: 100%; height: 400rpx;" wx:if="{{yuUrl == ''}}">
+						<ec-canvas id="mychart-dom-line2" canvas-id="mychart-line2" ec="{{ ec2 }}">
+						</ec-canvas>
+					</view>
+					<image aria-role="img" src="{{yuUrl}}" wx:else style='width: 100%; height: 400rpx;' wx:else></image>
+					<!-- </scroll-view> -->
+				</view>
+				<!-- <view class="card-title" style='color: {{color}}; font-size: 20rpx; padding-left: 5rpx;'>注：未来2小时降水强度</view> -->
+			</view>
+
+			<wxs module="yqutils">
+				var sub = function(a, b) {
+					var s = parseInt(a) - parseInt(b)
+					if (s >= 0)
+						s = "+" + s
+					return s
+				}
+				module.exports.sub = sub
+			</wxs>
+
+			<!-- 疫情 -->
+			<view class="card" wx:if="{{yi != '' && (yi.currentConfirmedCount > 0 || yqutils.sub(yi.confirmedCount, ydyi.confirmedCount) != 0)}}" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+				<view class="card-title rain-title" style='color: {{color}};'>
+					<view>{{shi}}最新疫情</view>
+				</view>
+				<view class="b-it" style='color: {{color}};'>
+					<view>
+						<text decode='true'>现有确诊</text>
+						<span>{{yi.currentConfirmedCount}}</span>
+						<span>较昨日 {{yqutils.sub(yi.currentConfirmedCount, ydyi.currentConfirmedCount)}}</span>
+					</view>
+					<view>
+						<text decode='true'>累计确诊</text>
+						<span>{{yi.confirmedCount}}</span>
+						<span>较昨日 {{yqutils.sub(yi.confirmedCount, ydyi.confirmedCount)}}</span>
+					</view>
+					<!-- <view style='color: {{color}};'>
+						<text decode='true'>疑似病例:&nbsp;&nbsp;</text>
+						<span>{{yi.suspectedCount}} 人</span><br></br>
+					</view> -->
+					<view>
+						<text decode='true'>累计治愈</text>
+						<span>{{yi.curedCount}}</span>
+						<span>较昨日 {{yqutils.sub(yi.curedCount, ydyi.curedCount)}}</span>
+					</view>
+					<view>
+						<text decode='true'>累计死亡</text>
+						<span>{{yi.deadCount}}</span>
+						<span>较昨日 {{yqutils.sub(yi.deadCount, ydyi.deadCount)}}</span>
+					</view>
+				</view>
+				<view style="color: #8c8c8cc4;padding: 50rpx 10rpx 10rpx 10rpx; font-size: 18rpx; display: flex; justify-content: space-between;">
+					<view>更新至：{{yi.time}}</view><br></br>
+					<view>关注疫情，积极防护</view>
+				</view>
+			</view>
+
+
+			<!-- 生活指数 -->
+			<view class="card" style='padding-left: 0; padding-right: 0; width: 690rpx;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}' bindtap='jump' data-path="/pages/life/life">
+				<swiper autoplay="{{true}}" circular="{{true}}" interval="{{8000}}" style='height: 190rpx;'>
+
+					<swiper-item>
+						<view class="dmain" style="height: 190rpx;">
+							<view>
+								<i aria-label="湿度" class="iconfont icon-humidity" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">湿度</view>
+								<view>{{tools.round(info.result.realtime.humidity*100)}}%</view>
+							</view>
+							<view>
+								<i aria-label="体感" class="iconfont icon-iconset0480" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">体感</view>
+								<view>{{info.result.realtime.comfort.desc}}</view>
+							</view>
+							<view>
+								<i aria-label="感冒指数" class="iconfont icon-shouye" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">感冒指数</view>
+								<view>{{info.result.daily.coldRisk[0].desc}}</view>
+							</view>
+						</view>
+					</swiper-item>
+
+					<swiper-item>
+						<view class="dmain" style="height: 190rpx;">
+							<view>
+								<i class="iconfont icon-richu" style="font-size: 52rpx; color: {{color}};"></i>
+								<view aria-label="日出" class="dmain-desc">日出</view>
+								<view>{{info.result.daily.astro[0].sunrise.time}}</view>
+							</view>
+							<view>
+								<i aria-label="紫外线" class="iconfont icon-qing" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">紫外线</view>
+								<view>{{info.result.realtime.ultraviolet.desc}}</view>
+							</view>
+							<view>
+								<i aria-label="日落" class="iconfont icon-rila" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">日落</view>
+								<view>{{info.result.daily.astro[0].sunset.time}}</view>
+							</view>
+						</view>
+					</swiper-item>
+
+					<swiper-item>
+						<view class="dmain" style="height: 190rpx;">
+							<view>
+								<i aria-label="{{tools.windDir(info.result.realtime.wind.direction)}}" class="iconfont icon-fengshan" style="font-size: 54rpx; color: {{color}};"></i>
+								<view class="dmain-desc">{{tools.windDir(info.result.realtime.wind.direction)}}</view>
+								<view>{{tools.windJi(info.result.realtime.wind.speed)}}</view>
+							</view>
+							<view>
+								<i aria-label="空气质量" class="iconfont icon-jianzhuanquan" style="font-size: 50rpx; color: {{color}};"></i>
+								<view class="dmain-desc">空气质量</view>
+								<view>{{tools.aqiSwitch(info.result.realtime.aqi)}}</view>
+							</view>
+							<view>
+								<i aria-label="PM2.5" class="iconfont icon-icon-pm" style="font-size: 52rpx; color: {{color}};"></i>
+								<view class="dmain-desc">PM2.5</view>
+								<view>{{info.result.realtime.pm25}}</view>
+							</view>
+						</view>
+					</swiper-item>
+
+				</swiper>
+			</view>
+
+
+			<wxs module="sp">
+				var split = function(sp) {
+					if (typeof sp !== 'string') {
+						return ''
+					}
+					return sp.split(' ')
+				}
+				module.exports.split = split
+			</wxs>
+
+
+			<!-- 逐时天气 -->
+			<view class="card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}} padding-bottom: 20rpx;">
+				<!-- <view class="card-title" style='color: {{color}};'>{{info.result.forecast_keypoint}}</view> -->
+				<view aria-label="逐小时的天气状况，竖向排版为同一小时的数据，横向为每小时的数据，双击某一项，可以展开详细数据" class="card-title" style='color: {{color}}; padding: 0 5rpx;'>逐时天气</view>
+				<scroll-view scroll-x style='height: 260rpx; width: auto;'>
+					<view class="hour-weather">
+						<view wx:for="{{info.result.hourly.skycon}}" wx:key="index" catchtap='openItem' data-index="{{index}}" hover-class="{{darkMode ? 'cardItem-dark': 'cardItem'}}">
+							<view class="ep-ti">
+								<view class="dmain-desc">{{sp.split(tools.timeSwitch(item.datetime))[0]}}</view>
+								<view class="dmain-desc">{{sp.split(tools.timeSwitch(item.datetime))[1]}}</view>
+							</view>
+							<i aria-label="{{tools.weatherName(item.value)}}" class="iconfont {{tools.weatherIcon(item.value)}}" wx:if="{{icon}}" wx:for-index="index2" wx:key="index2" style="color: {{tools.colorSwitch(item.value, info.result.hourly.temperature[index].value)}}"></i>
+							<view wx:else>{{tools.weatherName(item.value)}}</view>
+							<view>{{tools.round(info.result.hourly.temperature[index].value)}}°</view>
+						</view>
+					</view>
+				</scroll-view>
+				<!-- <view class="card-title" style='padding: 5rpx; font-size: 22rpx;'>{{info.result.forecast_keypoint}}</view> -->
+			</view>
+
+
+
+			<details-card class="tiptop" style='height: {{windH}}px; {{isClose ? "animation: fadeo 0.25s ease-out;" : "animation: fadei 0.25s ease-out;"}}' wx:if="{{cardShow && !fu}}" close="{{isClose}}" darkMode="{{darkMode}}" bindtap="claseItem" date="{{sp.split(tools.timeSwitch(info.result.hourly.skycon[openIndex].datetime))[0]}}" time="{{sp.split(tools.timeSwitch(info.result.hourly.skycon[openIndex].datetime))[1]}}" weatherIcon="{{tools.weatherIcon(info.result.hourly.skycon[openIndex].value)}}" weatherText="{{tools.weatherName(info.result.hourly.skycon[openIndex].value)}}" temp="{{tools.round(info.result.hourly.temperature[openIndex].value)}}" windDir="{{tools.windDir(info.result.hourly.wind[openIndex].direction)}}" windJi="{{tools.windJi(info.result.hourly.wind[openIndex].speed)}}" windName="{{tools.windName(info.result.hourly.wind[openIndex].speed)}}" aqi="{{tools.aqiSwitch(info.result.hourly.aqi[openIndex].value)}}" aqiValue="{{info.result.hourly.aqi[openIndex].value}}" intensity="{{info.result.hourly.precipitation[openIndex].value}}" intensityName="{{tools.intensity(info.result.hourly.precipitation[openIndex].value)}}" hum="{{tools.round(info.result.hourly.humidity[openIndex].value*100)}}" visibility="{{info.result.hourly.visibility[openIndex].value}}" color="{{tools.colorSwitch(info.result.hourly.skycon[openIndex].value, info.result.hourly.temperature[openIndex].value)}}"></details-card>
+
+
+			<view class="card" style="position: relative;{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+				<view class="card-title" style='color: {{color}};' aria-label="此处为未来4天的天气，竖向排版为同一天的数据，横向为不同天的数据，双击某一项，可以展开详细数据">
+					未来几天
+					<!-- <text style='display: inline; font-size: 16rpx;' wx:if="{{canvUrl == ''}}" decode='true'>&nbsp;&nbsp;加载中...</text> -->
+				</view>
+				<!-- <canvas style="width: 100%; height: 300rpx;" canvas-id="secondCanvas" binderror="canvasIdErrorCallback">
+        <image src="{{canvUrl}}" style='width: 100%; height: 300rpx; position: absolute;'></image>
+      </canvas> -->
+
+				<view class="weilai" wx:if="{{canvUrl == ''}}">
+					<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+				</view>
+
+				<scroll-view scroll-x style='height: 590rpx; width: auto;'>
+					<!-- 未来几天 -->
+					<view class="weilai">
+						<image aria-role="img" src="{{canvUrl}}" style='height: 100%; width: 100%;'></image>
+					</view>
+
+					<view class="daily">
+						<view wx:for="{{info.result.daily.skycon}}" wx:key="index" catchtap='openItem' data-type="f" data-index="{{index}}" hover-class="{{darkMode ? 'cardItem-dark': 'cardItem'}}">
+							<view aria-label="{{info.result.daily.temperature[index].max}}度，到{{info.result.daily.temperature[index].min}}度">{{tools.dateToDay(item.date)}}</view>
+							<view class="dmain-desc">{{tools.dateSwitch(item.date)}}</view>
+							<i aria-label="{{tools.weatherName(item.value)}}" class="iconfont {{tools.weatherIcon(item.value)}}" wx:if="{{icon}}" style="color: {{tools.colorSwitch(item.value, info.result.daily.temperature[index].avg)}}"></i>
+							<view wx:else>{{tools.weatherName(item.value)}}</view>
+							<view>{{tools.windJi(info.result.daily.wind[index].avg.speed)}}</view>
+							<view>{{tools.windDir(info.result.daily.wind[index].avg.direction)}}</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+
+
+			<!-- 日历 -->
+			<view class="card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}" bindtap="openRili">
+				<view class="card-title" style='color: {{color}}; padding: 0 5rpx;'>{{ADate.oYear}}年{{ADate.oMonth}}月{{ADate.oDate}}日
+				</view>
+				<view class="l-top">
+					<view class="l-top-1">
+						<view style="margin-top: 20rpx; color: {{color}};" wx:for="{{ADate.festivalTodo}}" wx:key="index" wx:if="{{item}}">
+							<view wx:for="{{item.value}}" wx:for-index="idx" wx:key="idx" wx:for-item="item2">{{item2}}</view>
+						</view>
+						<view class="l-top-4" style="background-color: {{color}}1a; margin: 30rpx 0;">
+							<view style="color: {{color}};">星期{{ADate.cnDay}}</view>
+						</view>
+						<view class="l-top-desc">
+							{{ADate.gzYear}}{{ADate.animal}}年{{ADate.lMonth}}月{{ADate.lDate}}
+						</view>
+						<view wx:if="{{ADate.term != ''}}" style="color: {{color}}; font-size: 28rpx; align-items: center;">{{ADate.term}}</view>
+					</view>
+				</view>
+				<!-- <view class="more-rili">更多...</view> -->
+			</view>
+
+
+
+
+			<details-card class="tiptop" style='height: {{windH}}px; {{isClose ? "animation: fadeo 0.38s ease-out;" : "animation: fadei 0.38s ease-out;"}}' wx:if="{{cardShow && fu}}" close="{{isClose}}" darkMode="{{darkMode}}" bindtap="claseItem" date="{{tools.dateSwitch(info.result.daily.skycon[openIndex].date)}}" time="{{tools.dateToDay(info.result.daily.skycon[openIndex].date)}}" weatherIcon="{{tools.weatherIcon(info.result.daily.skycon_08h_20h[openIndex].value)}}" weatherText="{{tools.weatherName(info.result.daily.skycon_08h_20h[openIndex].value)}}" weatherIcon2="{{tools.weatherIcon(info.result.daily.skycon_20h_32h[openIndex].value)}}" weatherText2="{{tools.weatherName(info.result.daily.skycon_20h_32h[openIndex].value)}}" weather2="{{info.result.daily.skycon_20h_32h[openIndex].value}}" temp="{{tools.round(info.result.daily.temperature[openIndex].min)}}" temp2="{{tools.round(info.result.daily.temperature[openIndex].max)}}" windDir="{{tools.windDir(info.result.daily.wind[openIndex].avg.direction)}}" windJi="{{tools.windJi(info.result.daily.wind[openIndex].avg.speed)}}" windName="{{tools.windName(info.result.daily.wind[openIndex].avg.speed)}}" aqi="{{tools.aqiSwitch(info.result.daily.aqi[openIndex].avg)}}" aqiValue="{{info.result.daily.aqi[openIndex].avg}}" intensity="{{info.result.daily.precipitation[openIndex].avg}}" intensityName="{{tools.intensity(info.result.daily.precipitation[openIndex].avg)}}" intensity2="{{info.result.daily.precipitation[openIndex].min}}" intensity3="{{info.result.daily.precipitation[openIndex].max}}" intensityName2="{{tools.intensity(info.result.daily.precipitation[openIndex].min)}}" intensityName3="{{tools.intensity(info.result.daily.precipitation[openIndex].max)}}" hum="{{tools.round(info.result.daily.humidity[openIndex].avg*100)}}" visibility="{{info.result.daily.visibility[openIndex].avg}}" comfortValue="{{info.result.daily.comfort[openIndex].index}}" comfortName="{{info.result.daily.comfort[openIndex].desc}}" ultravioletValue="{{info.result.daily.ultraviolet[openIndex].index}}" ultravioletName="{{info.result.daily.ultraviolet[openIndex].desc}}" isdaily="{{true}}" color="{{tools.colorSwitch(info.result.daily.skycon[openIndex].value, info.result.daily.temperature[openIndex].avg)}}"></details-card>
+
+
+
+
+
+
+			<!-- <view class="card" style="margin-top: 30rpx; text-align: center;{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}" hidden='{{err || ad}}'>
+        <ad unit-id="adunit-bc0b46ca6ec78ab8" ad-intervals="35" bindload="adSuccess" binderror="adErr" bindclose="adErr" style="width: 100%; height: 100%; margin: 0 auto;"></ad>
+      </view> -->
+
+
+			<view class="videoAd" hidden='{{!videoAd}}'>
+				<!-- <ad unit-id="adunit-16471a54e03dc472" ad-type="grid" grid-opacity="0.8" grid-count="8" ad-theme="{{darkMode ? 'black': 'white'}}"></ad>
+        <br /> -->
+				<ad unit-id="adunit-65201f86d2c90e2d" ad-type="video" ad-theme="{{darkMode ? 'black': 'white'}}" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+			</view>
+
+			<!-- <view class="tiptop" style='height: {{windH}}px;' wx:if="{{battery}}">
+        <view class="tip-desc card">
+          <image src="../../static/img/ba-.svg" class="battery" wx:if="{{batteryIcon}}"></image>
+          <image src="../../static/img/ba.svg" class="battery" wx:else></image>
+          <view>当前电量过低，请注意充电哦~</view>
+          <view>
+            <view class="button" style='color: gray; border: 1px solid gray; font-size: 24rpx;padding: 14rpx 30rpx;' bindtap='topbind'>确定({{batteryTime}})</view>
+          </view>
+        </view>
+      </view> -->
+
+			<view wx:if="{{chanName != ''}}" class="back-main" bindtap="backHome" style="background-color: {{color}};">
+				<i class="iconfont icon-dingwei"></i>
+			</view>
+
+
+		</view>
+
+	</view>
+
+
+</default>

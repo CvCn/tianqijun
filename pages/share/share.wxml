@@ -1,0 +1,13 @@
+<!--pages/share/share.wxml-->
+<default nav-name="天气小心情" binddark="onDark" color="{{color}}">
+  <view class="s-main" style='{{darkMode ? "background-color: #131313;": ""}}'>
+      <image src="{{shareImg}}"></image>
+      
+      <view style=''>
+        <view class="button" style='margin-left: 100rpx; border: 1px solid {{color}};color: {{color}};' bindtap='saveImg'>保存到本地</view>
+        <button open-type="share" class="button" style='margin-left: 120rpx; background-color: #00000000; border: 1px solid {{color}};color: {{color}};'>分享给好友</button> 
+      </view>
+      <view>tip: </view>
+      <view>因为微信的限制，目前小程序无法直接分享到朋友圈，请手动保存图片到本地，然后再发送到朋友圈。</view>
+  </view>
+</default>

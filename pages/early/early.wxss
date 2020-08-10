@@ -1,0 +1,32 @@
+/* pages/early/early.wxss */
+
+.e-main{
+  padding-top: 90rpx;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  color: #8c8c8c;
+  padding-bottom: 250rpx;
+}
+.alert-context {
+  font-size: 28rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  line-height: 50rpx;
+}
+.alert-more:not(:first-of-type) {
+  margin-top: 30rpx;
+}
+.e-main > view{
+  margin-bottom: 35rpx;
+}
+
+.videoAd {
+  width: 100%;
+  margin-top: 20rpx;
+  /* transform: scale(0.9, 0.9) */
+  box-shadow: 0rpx 2rpx 7rpx 0 rgba(128, 128, 128, 0.1);
+  position: fixed;
+  bottom: 0;
+}

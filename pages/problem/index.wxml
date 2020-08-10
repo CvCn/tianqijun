@@ -1,0 +1,96 @@
+<!--pages/problem/index.wxml-->
+<default binddark="onDark" color="{{color}}">
+  <view class="p-main" style='{{darkMode ? "background-color: #131313;": ""}}'>
+    <view class="list">
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>天气图标对照表</view>
+        <view class="abo my-list">
+          <view class="my-item">
+            <i class="iconfont icon-qing"></i>
+            晴-白天
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-yueliang"></i>
+            晴-夜间
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-duoyun"></i>
+            多云-白天
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-duoyunye"></i>
+            多云-夜间
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-yin"></i>
+            阴
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-icon--"></i>
+            风
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-dehaze"></i>
+            霾
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-yu"></i>
+            雨
+          </view>
+          <view class="my-item">
+            <i class="iconfont icon-xue"></i>
+            雪
+          </view>
+        </view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>关于夜间模式</view>
+        <view class="abo">夜间模式选择自定义时间，如果结束时间比起始时间早，则按隔天处理，比如设定的时间在23:00~6:00, 那么夜间模式的启用时间是在23:00到第二天的早上6:00。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>为什么我的日出日落时间不准确？</view>
+        <view class="abo">日出日落时间依赖于您当前的位置，请到设置-权限管理开启定位权限</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>我该如何删除添加的城市？</view>
+        <view class="abo">左滑需要删除的城市就可以看到删除按钮啦。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>天气指数只有九项数据吗？</view>
+        <view class="abo">点击首页的指数卡片，进入指数详情页就可以看到更多数据了，而且更详细。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>为什么我的位置定位不准呢？</view>
+        <view class="abo">如果没有打开定位权限，定位是不准确的，可以进设置>授权管理打开定位权限，而且打开定位权限后天气数据更加准确。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>为什么定位一直在杭州？</view>
+        <view class="abo">如果没有打开定位权限，默认就是杭州。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>天气君的准确率如何？</view>
+        <view class="abo">目前天气君的数据每30秒更新一次，降水预报更是精确到分钟级，误差在一公里以内。</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>天气君的降水提示有什么规则吗？</view>
+        <view class="abo">如果未来2小时内此地有降水，首页会显示降水强度模块，该模块显示的是未来2小时内每分钟的降水强度</view>
+      </view>
+
+      <view class="item card" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+        <view class="card-title" style='color: {{color}}'>天气君有天气预警吗？</view>
+        <view class="abo">这个必须有，如果此地的气象局发布了预警信息，首页会显示预警模块，也是30秒更新一次，想要获取最新的预警信息？赶紧下拉刷新吧。</view>
+      </view>
+
+
+    </view>
+  </view>
+</default>

@@ -1,0 +1,44 @@
+<!--pages/shezhi/about/about.wxml-->
+<default binddark="onDark" color="{{color}}">
+  <view class="a-main" style='color: {{color}}; {{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-60}}px;'>
+    <view class="card" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">关于作者</view>
+      <view class="abo">
+        <view class="head-fa">
+          <image class="head" src="/static/img/head.jpg"></image>
+          <view style='margin-top: 20rpx;color: {{color}};'>莫小伟</view>
+          <view style='margin-top: 20rpx; color: #8c8c8ca4'>北京</view>
+        </view>
+        <view class="btn" style='border: 1px solid {{color}}; margin-top: 50rpx;color: {{color}};' bindtap='zanshang'>赞赏</view>
+      </view>
+    </view>
+
+    <!-- <view class="card">
+      <view class="card-title">关于 · Mr.Weather</view>
+      <view class="abo">小小天气君的制作灵感来自于Mr.Weather，感谢Mr.Weather所带来的创意
+      </view>
+    </view> -->
+
+    <view class="card" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'> 
+      <view class="card-title">此次版本更新</view>
+      <text class="abo" style='align-items: flex-start;' decode='true'>{{versionDesc}}
+
+      反馈入口：设置-反馈\n
+        特点：
+          1. 更及时的天气数据，每30秒更新一次！
+          2. 精准降水预报，精确到每分钟！
+          3. 极简风格设计，更纯粹的天气查询工具。
+      </text>
+    </view>
+
+    <view class="card" style='margin-bottom: 60rpx;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+      <view class="card-title">下个版本</view>
+      <view class="abo">
+      好渴啊，赏杯可乐吧<view bindtap="zanshang" style='border-bottom: 1px solid #8c8c8c;'>赞赏</view>
+      </view>
+      
+    </view>
+
+
+  </view>
+</default>

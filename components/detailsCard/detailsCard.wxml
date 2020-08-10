@@ -1,0 +1,98 @@
+<!--components/detailsCard/detailsCard.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+<view class="shad" style='height: {{windH}}px;'>
+  <view class="card topCan" style='{{close=="true" ? "animation: fadeout 0.25s ease-out;": "animation: fadein 0.3s ease-out;"}} background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}' catchtap='cos'>
+ 
+    <view wx:if="{{isdaily}}">
+      <view style='color: #8c8c8c79; font-weight: bold; display: flex; align-items: center;'>{{time}}
+        <span style="font-size: 22rpx; padding-left: 10rpx;">{{date}}</span>
+      </view>
+      <view class="weather-main">
+        <view>
+          <i class="iconfont {{weatherIcon}}" wx:if="{{icon}}" style="font-size: 110rpx; color: {{color}};"></i>
+        </view>
+        <span style="font-size: 24rpx;">转</span>
+        <view>
+          <i class="iconfont {{weatherIcon2}}" wx:if="{{icon}}" style="font-size: 110rpx; color: {{tools.colorSwitch(weather2, temp2)}};"></i>
+        </view>
+      </view>
+    </view>
+
+
+
+
+    <view wx:else>
+      <view style='color: #8c8c8c79; font-weight: bold; display: flex; align-items: center;'>{{time}}
+        <span style="font-size: 22rpx; padding-left: 10rpx;">{{date}}</span>
+      </view>
+      <i class="iconfont {{weatherIcon}}" wx:if="{{icon}}" style="font-size: 92rpx; color: {{color}};"></i>
+      <view>{{temp}}°</view>
+    </view>
+
+    <view wx:if="{{isdaily}}" style='font-size: 26rpx;'>
+      <view>{{temp}}° ~ {{temp2}}°</view>
+    </view>
+
+    <view class="weather-item">
+
+      <view wx:if="{{isdaily}}" style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+        <i class="iconfont icon-yusan" style="color: {{color}};"></i>
+        <view>平均降水强度</view>
+        <view>{{tools.round(intensity * 100)}}%({{intensityName}})</view>
+        <view class="water" style='height: {{intensity*160}}rpx;'></view>
+      </view>
+
+      <view wx:else style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+        <i class="iconfont icon-yusan" style="color: {{color}};"></i>
+        <view>降水强度</view>
+        <view>{{tools.round(intensity * 100)}}%({{intensityName}})</view>
+        <view class="water" style='height: {{intensity*160}}rpx;'></view>
+      </view>
+
+
+      <view style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+        <i class="iconfont icon-humidity" style="color: {{color}};"></i>
+        <view>湿度</view>
+        <view>{{hum}}%</view>
+        <!-- <view class="water" style='height: {{hum*160/100}}rpx; background-color: #6ad2ff;'> -->
+          <!-- <view class="wa" wx:for="{{11}}" wx:key="{{index}}">。</view> -->
+        <!-- </view> -->
+      </view>
+
+      <view style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}' wx:if="{{isdaily}}">
+        <i class="iconfont icon-fengshan" style="color: {{color}};"></i>
+        <view>体感</view>
+        <view>{{comfortName}}</view>
+        <!-- <view class="water" style='height: {{(13-comfortValue) / 13 * 160}}rpx; background-color: rgb(255, 115, 0);'></view> -->
+      </view>
+
+      <view style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}' wx:if="{{isdaily}}">
+        <i class="iconfont icon-fengshan" style="color: {{color}};"></i>
+        <view>紫外线</view>
+        <view>{{ultravioletName}}</view>
+        <!-- <view class="water" style='height: {{ultravioletValue / 5 * 160}}rpx; background-color: rgb(195, 0, 255);'></view> -->
+      </view>
+
+      <view style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+        <i class="iconfont icon-fengshan" style="color: {{color}};"></i>
+        <view>{{windDir}}</view>
+        <view>{{windJi}}/{{windName}}</view>
+        <!-- <view class="water" style='height: {{windJi / 250 * 160}}rpx; background-color: rgb(83, 122, 71);'></view> -->
+      </view>
+
+      <view style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+        <i class="iconfont icon-jianzhuanquan" style="color: {{color}};"></i>
+        <view>空气质量</view>
+        <view>{{aqi}}</view>
+        <!-- <view class="water" style='height: {{aqiValue / 300 * 160}}rpx; background-color: #6b6b8b;'></view> -->
+      </view>
+
+      <!-- <view>
+        <i class="iconfont icon-fengshan"></i>
+        <view>能见度</view>
+        <view>{{visibility}}km</view>
+      </view> -->
+
+    </view>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+/* pages/life/life.wxss */
+
+.l-main{
+  padding-top: 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 30rpx; */
+  flex-wrap: wrap;
+}
+
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  width: 280rpx;
+  margin-top: 30rpx;
+}
+.item>view:first-child{
+  color: #8c8c8c;
+}
+
+.card{
+  margin-bottom: 30rpx;
+}
+
+.danwei{
+  display: inline;
+  font-size: 18rpx;
+  color: #8c8c8c;
+  margin-left: 6rpx;
+}

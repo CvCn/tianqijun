@@ -1,0 +1,9 @@
+<!--components/switchButton/switchButton.wxml-->
+
+<view bindtap='swit'>
+  <view class="b-1" style='{{darkMode ? "box-shadow: 0 0 1px 2px #131313;": ""}} {{darkMode? "background-color:  rgb(32,32,32);" : ""}}'>
+    <!-- <view class="b-2" style='animation: {{sw ? "b-2-on": "b-2-off"}} 0.3s ease-in-out forwards; background-color: {{sw ? color : "#fff"}};'></view> -->
+    <view class="b-b" style='width: {{width}}rpx; height: {{height}}rpx;background-color: {{color}};'></view>
+  </view>
+  <view class="b-2" style='margin-left: {{left}}rpx; margin-top: -50rpx; background-color: white;{{darkMode ? "background-color: black;box-shadow: 0 0 1px 2px #131313": ""}}'></view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "desc": "小小天气军",
+  "rules": [{
+  "action": "allow",
+  "page": "*"
+  }]
+}

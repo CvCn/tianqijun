@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "default": "/components/default",
+    "switchButton": "/components/switchButton/switchButton",
+    "my-picker": "/components/myPicker/myPicker"
+  }
+}

@@ -1,0 +1,82 @@
+<!--pages/shezhi/global/global.wxml-->
+<default id="default" binddark="onDark" color="{{color}}">
+	<view class="g-main" style='{{darkMode ? "background-color: #131313;": ""}} height: {{windH-60}}px;'>
+		<view class="list">
+
+			<view style='margin-bottom: 30rpx;'>
+
+				<view class="item card" style='z-index: 4;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+					<view style=''>深色模式</view>
+					<!-- <switchButton color="{{color}}" init="{{sw}}" dark-mode="{{darkMode}}" bindchange="change"></switchButton> -->
+					<switch checked="{{sw}}" bindchange="change" wx:if="{{theme == undefined}}"></switch>
+				</view>
+				<view wx:if="{{theme != undefined}}" class="tip" style="padding-left: 30rpx;">深色模式在此设备上将跟随系统自动切换</view>
+
+				<view style='overflow: hidden;' wx:if="{{theme == undefined}}">
+
+					<view hidden="{{!oneShow}}" style='animation: none; margin-top: {{oneTop}}rpx;z-index: 3;position: relative;'>
+						<view class="item card" style='z-index: 2;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+							<view style=''>定时启用</view>
+							<my-picker bindchange="bindPickerChange" color="{{color}}" index="{{[index]}}" value="{{array}}" darkMode="{{darkMode}}">
+								<view class="picker" style='color: {{color}};'>
+									{{array[0][index]}}
+								</view>
+							</my-picker>
+						</view>
+
+						<view style='overflow: hidden;'>
+							<view hidden="{{!twoShow}}" style='animation: none; margin-top: {{twoTop}}rpx; z-index: 1;'>
+								<view class="item card" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+									<view style=''>起始时间
+
+									</view>
+									<my-picker mode="time" start="{{startTime}}" color="{{color}}" darkMode="{{darkMode}}" bindchange="bindStartTimeChange">
+										<view class="picker" style='color: {{color}};'>
+											{{startTime}}
+										</view>
+									</my-picker>
+								</view>
+
+								<view class="item card" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+									<view style=''>结束时间</view>
+									<my-picker mode="time" start="{{endTime}}" color="{{color}}" darkMode="{{darkMode}}" bindchange="bindEndTimeChange">
+										<view class="picker" style='color: {{color}};'>
+											{{endTime}}
+										</view>
+									</my-picker>
+								</view>
+								<!-- <view style='font-size: 16rpx;'>如果起始时间在结束时间之前，会默认按隔夜处理</view> -->
+							</view>
+						</view>
+						<view class="tip" wx:if="{{index == 1 && sw}}" style="padding-left: 30rpx;">如果时间不准确，请到设置-授权管理检查是否开启定位权限</view>
+						<view class="tip" wx:if="{{index == 2 && sw}}" style="padding-left: 30rpx;">夜间模式将一直启用</view>
+					</view>
+				</view>
+
+			</view>
+
+			<!-- <view class="item card" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+        <view style=''>关闭广告</view>
+        <switchButton color="{{color}}" init="{{ad}}" dark-mode="{{darkMode}}" bindchange="adChange"></switchButton>
+      </view> -->
+
+			<view class="item card" style='z-index: 2;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>显示小图标</view>
+				<!-- <switchButton color="{{color}}" init="{{icon}}" dark-mode="{{darkMode}}" bindchange="iconChange"></switchButton> -->
+				<switch checked="{{icon}}" bindchange="iconChange"></switch>
+			</view>
+			<view class="tip" wx:if="{{icon}}">关闭此选项，天气小图标将以文字形式显示</view>
+			<view class="tip" wx:else>开启此选项，部分天气描述将以小图标形式显示</view>
+
+
+			<view class="item card" style='z-index: 2;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>屏幕常亮</view>
+				<!-- <switchButton color="{{color}}" init="{{alwaysBright}}" dark-mode="{{darkMode}}" bindchange="brightChange"></switchButton> -->
+				<switch checked="{{alwaysBright}}" bindchange="brightChange"></switch>
+			</view>
+			<view class="tip" wx:if="{{alwaysBright}}">关闭此选项，小程序将关闭常亮状态</view>
+			<view class="tip" wx:else>开启此选项，小程序将保持常亮状态</view>
+
+		</view>
+	</view>
+</default>

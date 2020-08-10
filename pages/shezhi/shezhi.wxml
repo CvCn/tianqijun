@@ -1,0 +1,40 @@
+<!--pages/shezhi/shezhi.wxml-->
+<default binddark="onDark" color="{{color}}">
+	<view class="s-main" style='color: {{color}};{{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-60}}px;'>
+		<view class="logo">
+			<i class="iconfont icon-cloud" style="font-size: 102rpx;"></i>
+			<view style='margin-top: 10rpx;'>小小天气君 {{version}}</view>
+			<view>开源社区</view>
+			<view bindtap="setClipboardData">https://github.com/CvCn/tianqijun</view>
+		</view>
+
+		<view class="list">
+			<view class="item card" bindtap='jump' data-path="/pages/shezhi/global/global" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>全局设置</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style=''></i>
+			</view>
+			<view class="item card" bindtap='shouquan' style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>授权管理</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style=''></i>
+			</view>
+
+			<view class="item card" bindtap='jump' data-path="/pages/problem/index" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>常见问题</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style='; '></i>
+			</view>
+
+			<button class="item card fankui" open-type='feedback' style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=';' bindtap='fankui'>反馈</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style=''></i>
+			</button>
+			<view class="item card" bindtap='jump' data-path="/pages/shezhi/about/about" style='{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>关于</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style='; '></i>
+			</view>
+			<view class="item card" bindtap='clear' style='color: #ca0505;{{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'>
+				<view style=''>还原小程序</view>
+				<i class="iconfont icon-xiayiyeqianjinchakangengduo" style='; '></i>
+			</view>
+		</view>
+	</view>
+</default>

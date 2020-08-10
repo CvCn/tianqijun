@@ -1,0 +1,19 @@
+<!--components/detailsCard/detailsCard.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+<slot bindtap="open"></slot>
+<view class="tiptop" wx:if="{{close}}" bindtap="close" style='{{!anclose ? "animation: fadeout 0.2s ease-out;": "animation: fadein 0.25s ease-out;"}} height: {{windH}}px;'>
+  <!-- catchtouchmove="ture" -->
+  <view class="shad" style='{{!anclose ? "animation: scrollout 0.2s ease-in;": "animation: scrollin 0.2s ease-out;"}}'>
+    <view class="card" catchtap='cos' style='background-color: {{darkMode ? "rgb(32,32,32);": "white;"}}'>
+      <view class="tittle">
+        <view bindtap="close">取消</view>
+        <view bindtap="ok" style="color: #00c957">确定</view>
+      </view>
+      <picker-view indicator-style='height: 50px;' mask-style='opacity: 0;' style='padding-top: 80rpx; width: 100%; height: 420rpx;' value="{{index}}" bindchange="bindChange">
+        <picker-view-column wx:for="{{value}}" wx:for-index="idx1" wx:key="idx1">
+          <view wx:for="{{item}}" wx:for-item="item2" wx:for-index="idx2" wx:key="idx2" style="font-size: 36rpx; line-height: 50px; text-align: center; {{idx2 == changeDetail.value[idx1] ? 'color: ' + color : ''}}">{{item2}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>

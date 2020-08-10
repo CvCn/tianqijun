@@ -1,0 +1,42 @@
+/* pages/problem/index.wxss */
+
+.p-main{
+  padding-top: 90rpx;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item{
+  margin-bottom: 30rpx;
+}
+.abo{
+  align-items: flex-start;
+}
+
+.card-title{
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+
+.my-list{
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.my-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 50rpx 0;
+  width: 200rpx;
+}
+
+.my-item > i{
+  margin-bottom: 10rpx;
+}

@@ -1,0 +1,25 @@
+<!--component/default.wxml-->
+
+
+<view class="top" style='padding-top: {{navHeight}}px; {{darkMode ? "background-color: rgb(19,19,19);": ""}}' wx:if="{{shezhi}}">
+	<i class="iconfont icon-shezhi" style="font-size: 52rpx;" bindtap="shezhi" aria-label="菜单键"></i>
+</view>
+<view class="top" style='padding-top: {{navHeight}}px; {{navName.length > 12 ? "font-size: 24rpx;":""}}{{darkMode ? "background-color: rgb(19,19,19); color: white;": "color: black;"}} opacity: 0.99; ' wx:else>
+	<view wx:if="{{reqFail}}">网络异常</view>
+	<view wx:else>
+		<i class="iconfont icon-dingwei" aria-label="当前为定位的位置" style="color: #8c8c8c; margin-left: 20rpx;" wx:if="{{curr && navName.length <= 12}}"></i>
+		{{navName}}<text decode="true" wx:if="{{curr && navName.length <= 12}}">&nbsp;&nbsp;&nbsp;</text>
+	</view>
+</view>
+
+<view class="ball" style='top: {{navHeight}}px; background-color: {{color}}; border-color: {{color}};' wx:if="{{load}}" bindtap="back"></view>
+<i class="menu iconfont icon-caidan" style='top: {{navHeight}}px; color: {{color}};' bindtap="menu" wx:if="{{menuStyle == 'home' && !load}}"></i>
+<i class="menu iconfont icon-back" style='top: {{navHeight}}px; color: {{color}}; font-weight: bold;' bindtap="back" wx:if="{{menuStyle == 'back' && !load}}"></i>
+<view style="padding-top: {{navHeight + 10}}px; {{darkMode ? 'background-color: #131313;': ''}}"></view>
+
+
+<view wx:if="{{reqFail}}" class="fail" style='height: {{winH-40}}px;{{darkMode ? "background-color: rgb(32,32,32);": ""}}'>
+	<view class="error">!</view>
+	<view class="button" bindtap='reload'>重新加载</view>
+</view>
+<slot wx:else />

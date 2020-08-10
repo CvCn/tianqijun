@@ -1,0 +1,22 @@
+<!--pages/early/early.wxml-->
+<!-- 预警 -->
+<default binddark="onDark" color="{{color}}">
+  <view class="e-main" style='{{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-80}}px;'>
+    <view class="card" wx:for="{{alert}}" wx:key="index" style="{{darkMode ? 'background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);' : ''}}">
+      <view class="alert-more">
+        <view style='color: {{color}};'>
+          <i class="iconfont icon-richu" style="color: {{item.jibie}}; background-color: {{item.jibie}}; border-radius: 50%;"></i>
+          {{item.value}}
+        </view>
+        <view class="alert-context">{{item.description}}</view>
+      </view>
+      <!-- <view class="alert-context" style="float: right; font-size: 15rpx;">—— {{item.source}}</view> -->
+    </view>
+
+
+    <!-- <view class="videoAd" hidden='{{!videoAd}}'>
+      <ad unit-id="adunit-16471a54e03dc472" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="{{darkMode ? 'black': 'white'}}" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+    </view> -->
+    
+  </view>
+</default>

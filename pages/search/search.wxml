@@ -1,0 +1,73 @@
+<!--pages/search/search.wxml-->
+<wxs src="../../utils/tools.wxs" module="tools"></wxs>
+<default load="{{load}}" req-fail="{{reqFail}}" binddark="onDark" color="{{def.color}}">
+  <view class="search" style='{{darkMode ? "background-color: #131313;": ""}} min-height: {{windH-80}}px;'>
+    <view class="city-list">
+      <view class="city-item card" style='color: {{def.color}}; margin-bottom: 45rpx; {{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}' bindtap='back' bindtouchstart='start' data-id="-1">
+        <view>
+          <view style='display: flex; align-items: center;'>
+            {{def.address ? def.address : '点击查看当前位置天气'}}
+            <i class="iconfont icon-dingwei" style="color: #8c8c8c; margin-left: 20rpx;"></i>
+            <text style='color: #8c8c8c; font-size: 18rpx;'> {{scopeLoca}}</text>
+          </view>
+          <text style='font-size: 40rpx;' decode='true'>{{tools.round(def.wendu)}}°&nbsp;&nbsp;{{def.weatherDesc}}</text>
+          <text decode='true'>{{tools.windDir(def.fengName)}}{{tools.windJi(def.fengji)}}&nbsp;&nbsp;·&nbsp;&nbsp;空气{{tools.aqiSwitch(def.kongqi)}}</text>
+        </view>
+        <i class="iconfont {{tools.weatherIcon(def.weather)}}"></i>
+      </view>
+
+      <view class="add" style='color: {{def.color}};'>
+        <i class="iconfont icon-shezhi" bindtap="shezhi"></i>
+        <i class="iconfont icon-Add" bindtap="add"></i>
+      </view>
+
+
+      <view class="item-fa" wx:for="{{cityList}}" wx:key="inde" wx:for-index="inde" style='{{delIndex == inde ? ("height: " +  delHeight + "rpx; left: " + delLeft+ "rpx; margin-bottom: " + delBottom + "rpx; opacity: "+ delOpacity + ";") : ""}} top: {{moveTop[inde]}}rpx;'>
+        <view class="city-item card" style='color: {{tools.colorSwitch(item.json.result.skycon, item.json.result.temperature)}}; {{index == inde ? "margin-left:" +  moveDis + "px;": ""}} {{darkMode ? "background-color: rgb(32,32,32); box-shadow: 0rpx 2rpx 7rpx 0 rgba(32,32,32, 0.1);" : ""}}'
+          bindtap='back' bindtouchmove="move" bindtouchcancel='end' bindtouchend='end' bindtouchstart='start' data-id="{{inde}}">
+          <view>
+            <view>
+              {{item.allName}}
+            </view>
+            <text style='font-size: 40rpx;' decode='true'>{{tools.round(item.json.result.temperature)}}°&nbsp;&nbsp;{{tools.weatherName(item.json.result.skycon)}}</text>
+            <text decode='true'>{{tools.windDir(item.json.result.wind.direction)}}{{tools.windJi(item.json.result.wind.speed)}}&nbsp;&nbsp;·&nbsp;&nbsp;空气{{tools.aqiSwitch(item.json.result.aqi)}}</text>
+          </view>
+          <i class="iconfont {{tools.weatherIcon(item.json.result.skycon)}}"></i>
+        </view>
+
+        <view class="move" wx:if="{{isMove}}" data-index="{{inde}}" style='{{darkMode ? "background-color: rgb(32,32,32);" : ""}}'>
+
+          <view style="transform: rotate(90deg); background-color:{{def.color}};" class="jiantou" bindtap='{{inde != 0 ? "shang": ""}}' data-id="{{inde}}">
+            <i class="iconfont icon-back"></i>
+          </view>
+
+          <view style="transform: rotate(-90deg); background-color: {{def.color}};" class="jiantou" bindtap='{{inde != cityList.length-1 ? "xia" : ""}}' data-id="{{inde}}">
+            <i class="iconfont icon-back"></i>
+          </view>
+
+        </view>
+
+        <view class="del" bindtap="del" wx:else style='width: {{index==inde ? (moveDis < -80 ? 83 : moveDis*-1) : "0"}}px;{{darkMode ? "color: rgb(32,32,32);" : ""}}' data-index="{{inde}}">
+          <i class="iconfont icon-shanchu" style="animation: card 2s ease-out;"></i>
+        </view>
+
+      </view>
+
+    </view>
+
+
+    <view class="switch-move" style='margin-bottom: 20rpx; color: {{def.color}};' wx:if="{{cityList.length > 1}}">
+      <i class="iconfont icon-dehaze" bindtap="longt" style="{{isMove ? 'transform: rotate(-90deg); margin-left: -30rpx;' : 'transform: rotate(0);'}}"></i>
+    </view>
+
+    <!-- <view style="border: 1px solid {{color}}; color: {{color}};" class="shezhi" bindtap='shezhi'>
+      <i class="iconfont icon-shezhi" style="font-size: 48rpx;"></i>
+      <view>设置</view>
+    </view> -->
+
+    <view>
+
+    </view>
+
+  </view>
+</default>
